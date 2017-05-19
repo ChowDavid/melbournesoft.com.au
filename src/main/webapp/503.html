@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+
+<title>Melbourne Soft</title>
+<meta name="description" content="Melbourne Soft">
+<meta name="author" content="melbournesoft.com.au">
+
+<!--link rel="stylesheet" href="css/styles.css?v=1.0"-->
+</head>
+
+<body>
+	<img id="mainImage" src="images/Under-construction.png" />
+
+	<script>
+	var w = document.documentElement.clientWidth || window.innerWidth ;
+	var h = document.documentElement.clientHeight || window.innerHeight;
+		var mainImage=document.getElementById('mainImage');
+		var rate=3320/2500; 
+		console.log("w/h "+(w/h));
+		console.log("rate "+rate);
+		if ((w/h)<rate){
+			mainImage.width = w;
+		} else {
+			mainImage.height = h;
+		}
+	</script>
+</body>
+</html>
