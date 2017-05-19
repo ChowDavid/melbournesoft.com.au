@@ -24,26 +24,21 @@
 				<version>1.7</version>
 				<executions>
 					<execution>
+						<id>copy_resources</id>
 						<phase>process-resources</phase>
 						<configuration>
-							<tasks>
+							<target>
 								<copy todir="${basedir}/src/main/webapp">
 									<fileset dir="${basedir}/src/main/ngApp/dist" includes="**/*" />
 								</copy>
-							</tasks>
+							</target>
 						</configuration>
 						<goals>
 							<goal>run</goal>
 						</goals>
 					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<version>1.7</version>
-				<executions>
 					<execution>
+						<id>rename war file</id>
 						<phase>install</phase>
 						<configuration>
 							<target>
@@ -84,7 +79,7 @@
 							<executable>ng</executable>
 							<arguments>
 								<argument>build</argument>
-								<argument>--base-href=/melbourne.web/</argument>
+								<argument>${ng-base-href}</argument>
 							</arguments>
 						</configuration>
 						<goals>
@@ -94,10 +89,27 @@
 				</executions>
 			</plugin>
 		</plugins>
+		
 	</build>
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compile.target>1.8</maven.compile.target>
 	</properties>
+
+	<profiles>
+		<profile>
+			<id>LOCAL</id>
+			<properties>
+				<ng-base-href>--base-href=/melbourne.web/</ng-base-href>
+			</properties>
+		</profile>
+		<profile>
+			<id>PROD</id>
+			<properties>
+				<ng-base-href>--base-href=/</ng-base-href>
+			</properties>
+		</profile>
+	</profiles>
+	
 
 </project>
